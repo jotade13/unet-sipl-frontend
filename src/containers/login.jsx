@@ -1,11 +1,8 @@
-import { useState } from 'react'
 import { Link } from 'react-router'
-import { useForm } from "react-hook-form"
 import { Input, Form } from "antd"
 
 function Login() {
 
-  const { register, handleSubmit } = useForm()
 
   const onFinish = (values) => {
     console.log('Success:', values);
