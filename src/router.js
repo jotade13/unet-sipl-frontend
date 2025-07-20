@@ -3,5 +3,24 @@ import { Root } from "./Root";
 
 
 export const router = createBrowserRouter([
-  { path: "/", Component: Root },
+    { 
+        path: "/", 
+        Component: Root,
+        children: [
+            {
+                path: "/auth", 
+                Component: AuthLayout, 
+                children: [
+                    { 
+                        path: "/login", 
+                        Component: Login
+                    },
+                    {
+                        path: "/login", 
+                        Component: Register
+                    },
+                ]
+            },
+        ]
+    },
 ]);
