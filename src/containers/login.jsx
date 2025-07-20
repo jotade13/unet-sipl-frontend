@@ -8,9 +8,9 @@ function Login() {
   return (
     <>
       <h1 className='text-white'>haaola</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit()}>
         <Input label="Email" register={register} required />
-        <Input label="Password" register={register} required />
+        <Input label="Password" type="password" register={register} required />
       </form>
     </>
   )
