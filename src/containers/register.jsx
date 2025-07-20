@@ -1,13 +1,26 @@
 import { useState } from 'react'
-import './App.css'
+import { Link } from 'react-router'
 
-function Register() {
+function Login() {
 
   return (
-    <>
-      
-    </>
+    <section className='d-flex justify-center flex-row items-center'>
+        <div className='w-[50%] d-flex'></div>
+        <div className='w-[50%] p-[20px] d-flex flex-col items-center justify-center'>
+            <h1 className='text-[40px] font-bold text-center'>Gestion de equipo</h1>
+            {/* formulario */}
+            {/* cierre formulario */}
+            <button
+                type="submit" 
+                style={{borderRadius:'20px',background:'#646cffaa'}} 
+                className='text-white d-flex justify-center items-center'
+            >
+                Continuar
+            </button>
+            <Link to="/login" className='text-[25px] '>Iniciar sesion</Link>
+        </div>
+    </section>
   )
 }
 
-export default Register
+export default Login
