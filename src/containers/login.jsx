@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
+import { useForm } from "react-hook-form"
+import { Input } from "../components/Input"
 
 function Login() {
+
+  const { register, handleSubmit } = useForm()
 
   return (
     <section className='flex justify-center flex-row items-center w-full h-[100vh]'>
@@ -10,6 +14,10 @@ function Login() {
         <div className='flex flex-col items-center justify-center' style={{borderRadius:'20px', border:'1px solid #2374a7', padding:'20px'}}>
           <h1 className='text-[50px] font-bold text-center'>Gestion de equipo</h1>
           {/* formulario */}
+          <form onSubmit={handleSubmit()}>
+            <Input label="Email" register={register} required />
+            <Input label="Password" type="password" register={register} required />
+          </form>
           {/* cierre formulario */}
           <button
             type="submit" 
