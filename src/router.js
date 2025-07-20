@@ -8,22 +8,16 @@ import { AuthLayout } from "./containers/AuthLayout";
 
 export const router = createBrowserRouter([
     { 
-        path: "/", 
-        Component: Root,
+        path: "/auth", 
+        Component: AuthLayout, 
         children: [
+            { 
+                path: "login", 
+                Component: Login
+            },
             {
-                path: "/auth", 
-                Component: AuthLayout, 
-                children: [
-                    { 
-                      path: "login", 
-                      Component: Login
-                    },
-                    {
-                      path: "register", 
-                      Component: Register
-                    },
-                ]
+                path: "register", 
+                Component: Register
             },
         ]
     },

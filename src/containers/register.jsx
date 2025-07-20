@@ -1,26 +1,26 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 
-function Login() {
+function Register() {
 
   return (
-    <section className='d-flex justify-center flex-row items-center'>
-        <div className='w-[50%] d-flex'></div>
-        <div className='w-[50%] p-[20px] d-flex flex-col items-center justify-center'>
-            <h1 className='text-[40px] font-bold text-center'>Gestion de equipo</h1>
-            {/* formulario */}
-            {/* cierre formulario */}
-            <button
-                type="submit" 
-                style={{borderRadius:'20px',background:'#646cffaa'}} 
-                className='text-white d-flex justify-center items-center'
-            >
-                Continuar
-            </button>
-            <Link to="/login" className='text-[25px] '>Iniciar sesion</Link>
-        </div>
+    <section className='flex justify-center flex-row items-center w-full h-[100vh]'>
+      <div className='w-[50%] h-[100%] flex bg-[#2374a7]'></div>
+      <div className='w-[50%] h-[100%] p-[20px] flex flex-col items-center justify-center'>
+          <h1 className='text-[50px] font-bold text-center'>Gestion de equipo</h1>
+          {/* formulario */}
+          {/* cierre formulario */}
+          <button
+            type="submit" 
+            style={{borderRadius:'20px',background:'#2346a7'}} 
+            className='text-white flex justify-center items-center p-[15px] text-[20px]'
+          >
+              Continuar
+          </button>
+          <Link to="../login" className='text-[20px]'>Iniciar sesion</Link>
+      </div>
     </section>
   )
 }
 
-export default Login
+export default Register
