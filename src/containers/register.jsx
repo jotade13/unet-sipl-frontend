@@ -12,7 +12,7 @@ function Register() {
           {/* cierre formulario */}
           <button
             type="submit" 
-            style={{borderRadius:'20px',background:'#2346a7'}} 
+            style={{borderRadius:'20px',background:'#162456'}} 
             className='text-white flex justify-center items-center p-[15px] text-[20px]'
           >
               Continuar
