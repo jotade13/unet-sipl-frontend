@@ -1,14 +1,18 @@
-import { useState } from 'react'
-import { Link } from 'react-router'
-import { useForm } from "react-hook-form"
+import { Link, useNavigate } from 'react-router'
 import { Input, Form } from "antd"
+import { axiosQuery } from '../utils/axios';
 
 function Login() {
+  const navigate = useNavigate();
 
-  const { register, handleSubmit } = useForm()
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
+
+  const   onFinish = async (values) => {
+    console.log(values)
+    const response = await axiosQuery.post("/login",values);
+    console.log(response)
+    localStorage.setItem("token", response.data.data.token)
+    navigate("dashboard")
   };
 
   return (
@@ -33,6 +37,13 @@ function Login() {
               >
                 <Input />
               </Form.Item>
+              <Form.Item
+                label="Contraseña"
+                name="password"
+                rules={[{ required: true,min:8, message: 'La contrasñea debe tener 8 caracteres'   }]}
+              >
+                <Input type='password'  />
+              </Form.Item>
               <div className='flex justify-center items-center'>
                 <button
                   type="submit" 
@@ -44,7 +55,6 @@ function Login() {
               </div>
             </Form>
           </div>
-          {/* cierre formulario */}
         </div>
         <Link to="../register" className='text-[20px] pt-[40px]'>Crear una nueva cuenta</Link>
       </div>
