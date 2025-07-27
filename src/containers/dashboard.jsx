@@ -60,7 +60,7 @@ function Login() {
                 ))}
             </div>
             <div className='container-list'>
-                {equipments.map(({id,name,status,description},index) => (
+                {equipments.map(({id,name,status,description,is_requested},index) => (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 20 }}
@@ -83,14 +83,20 @@ function Login() {
                             {description}
                         </div>
                         <div className='flex justify-center items-center'>
-                            <button
-                                type="submit" 
-                                style={{borderRadius:'20px',background:'#162456'}} 
+                            {is_requested ? <button
+                                type="submit"
+                                style={{borderRadius:'20px',background:'#162456'}}
                                 className='text-white flex justify-center items-center py-[5px] px-[10px] text-[18px] mt-[20px]'
                                 onClick={() => {requestEquipment(id)}}
                             >
                                 Solicitar
-                            </button>
+                            </button> : <button
+                              type="submit"
+                              style={{borderRadius:'20px',background:'#0fb630'}}
+                              className='text-white flex justify-center items-center py-[5px] px-[10px] text-[18px] mt-[20px]'
+                            >
+                                Equipo ya solicitado
+                            </button>}
                             {user?.rol === 'admin' && <button
                                 type="submit" 
                                 style={{borderRadius:'20px',background:'#162456'}} 
