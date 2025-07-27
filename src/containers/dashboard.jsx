@@ -1,32 +1,38 @@
-import { useEffect, useState } from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import { Link } from 'react-router'
 import { useForm } from "react-hook-form"
 import { Input, Form } from "antd"
 import { PuzzlePieceIcon, UserIcon } from '@heroicons/react/24/outline'
 import { motion } from 'motion/react'
+import { getEquipment } from "../services/equipment-services.js";
+import equipmentConsts from "../consts/equipment-consts.js";
+
 
 function Login() {
+    const status = Object.values(equipmentConsts.status)
 
-    const { register, handleSubmit } = useForm()
     const [statusSelect, setStatusSelect] = useState(0)
     const [user, setUser] = useState({})
+    const [equipments, setEquipments] = useState([])
 
     useEffect(() => {
         setUser({name: 'Cesar Mora', email: 'morecontrol64@gmail.com', rol: 'student'})
     },[])
 
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
 
-    const status = ['Disponible','Prestamo','Mantenimiento']
-    const equipmentTest = [
-        {id:0,status:'Disponible',name:'Lapiz',description:'Hola que hace'},
-        {id:2,status:'Prestamo',name:'Lonchera',description:'Hola que hace'},
-        {id:3,status:'Mantenimiento',name:'Manual',description:'Hola que hace'},
-        {id:4,status:'Disponible',name:'Colchon',description:'Hola que hace'},
-        {id:5,status:'Disponible',name:'Armadillo',description:'Hola que hace'},
-    ]
+
+    useEffect(() => {
+        const fetchEquipment = async () => {
+            try {
+                const response = await getEquipment(status[statusSelect]);
+                setEquipments(response.data.equipments.data)
+            } catch (error) {
+                console.error("Error fetching equipment:", error);
+            }
+        };
+
+        fetchEquipment();
+    }, [statusSelect]);
 
     return (
         <section className='flex justify-start flex-col items-center w-full h-[100vh] p-[100px]'>
@@ -44,7 +50,7 @@ function Login() {
                 ))}
             </div>
             <div className='container-list'>
-                {equipmentTest.map(({name,status,description},index) => (
+                {equipments.map(({name,status,description},index) => (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 20 }}
