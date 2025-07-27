@@ -1,18 +1,16 @@
 import { Link, useNavigate } from 'react-router'
-import { Input, Form } from "antd"
+import { Input, Form, Divider } from "antd"
 import { axiosQuery } from '../utils/axios';
 
 function Login() {
   const navigate = useNavigate();
+  const [form] = Form.useForm();
 
-
-
-  const   onFinish = async (values) => {
-    console.log(values)
-    const response = await axiosQuery.post("/login",values);
-    console.log(response)
+  const   onFinish = async () => {
+    let user = form.getFieldValue();
+    const response = await axiosQuery.post("/login",user);
     localStorage.setItem("token", response.data.data.token)
-    navigate("dashboard")
+    navigate("/dashboard")
   };
 
   return (
@@ -24,6 +22,7 @@ function Login() {
           {/* formulario */}
           <div className='w-full h-auto px-[20px]'>
             <Form
+              form={form}
               layout='vertical'
               className='w-full'
               // style={{ maxWidth: 600 }}
