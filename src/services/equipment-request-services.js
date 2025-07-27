@@ -1,9 +1,9 @@
 import {axiosQuery} from '../utils/axios.js'
 
-export const getEquipment = async (status) => {
+export const createEquipmentRequest = async (equipmentId) => {
     try {
-        const response = await axiosQuery.get('/equipment', {
-            params: {status}
+        const response = await axiosQuery.post('/equipment-request', {
+            equipment_id: equipmentId
         });
         return response.data;
     } catch (error) {
