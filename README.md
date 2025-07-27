@@ -1,12 +1,15 @@
-# React + Vite
+## SIPL
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este es un SIPL que la Unet implementó para pedir libros, en el cual los usuarios solicitan los libros y los admin dan los permisos necesarios para ello
 
-Currently, two official plugins are available:
+### Herramientas utilizadas 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Se utilizó React con vite por lo cual la ejecución del codigo es la siguiente
 
-## Expanding the ESLint configuration
+Se tiene que configurar la url del backend en el archivo .env 
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### correr el frontend de la aplicación
+
+cd unet-sipl-frontend
+npm i
+npm run dev
