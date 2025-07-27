@@ -5,6 +5,6 @@ export const axiosQuery = axios.create({
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer 8|RUMC3urBVlxnDM8hOofeWKrSPcUAsC8mVkyGxolebdcbc2ae'
+    'Authorization': 'Bearer 16|SQ5zo9T5Q99QaM7RmGfEc0r3M5dQNlVGAyZ4SOTU063fe1ef'
   }
 });

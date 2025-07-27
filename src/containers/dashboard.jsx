@@ -17,7 +17,7 @@ function Login() {
     const [equipments, setEquipments] = useState([])
 
     useEffect(() => {
-        setUser({name: 'Cesar Mora', email: 'morecontrol64@gmail.com', rol: 'student'})
+        setUser({name: 'Cesar Mora', email: 'morecontrol64@gmail.com', rol: 'admin'})
     },[])
 
 
@@ -83,21 +83,23 @@ function Login() {
                             {description}
                         </div>
                         <div className='flex justify-center items-center'>
+                            {user?.rol === 'admin'  ?
                             <button
                                 type="submit" 
                                 style={{borderRadius:'20px',background:'#162456'}} 
-                                className='text-white flex justify-center items-center py-[5px] px-[10px] text-[18px] mt-[20px]'
+                                className='text-white flex justify-center items-center py-[5px] px-[10px] text-[18px] mt-[20px] cursor-pointer'
+                            >
+                                Ver Solicitudes
+                            </button> :
+                            <button
+                                type="submit" 
+                                style={{borderRadius:'20px',background:'#162456'}} 
+                                className='text-white flex justify-center items-center py-[5px] px-[10px] text-[18px] mt-[20px] cursor-pointer'
                                 onClick={() => {requestEquipment(id)}}
                             >
                                 Solicitar
                             </button>
-                            {user?.rol === 'admin' && <button
-                                type="submit" 
-                                style={{borderRadius:'20px',background:'#162456'}} 
-                                className='text-white flex justify-center items-center py-[5px] px-[10px] text-[18px] mt-[20px]'
-                            >
-                                Ver Solicitudes
-                            </button>}
+                            }
                         </div>
                     </motion.div>
                 ))}
