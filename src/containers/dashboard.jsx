@@ -5,6 +5,7 @@ import { Input, Form } from "antd"
 import { PuzzlePieceIcon, UserIcon } from '@heroicons/react/24/outline'
 import { motion } from 'motion/react'
 import { getEquipment } from "../services/equipment-services.js";
+import {createEquipmentRequest} from "../services/equipment-request-services.js";
 import equipmentConsts from "../consts/equipment-consts.js";
 
 
@@ -34,6 +35,15 @@ function Login() {
         fetchEquipment();
     }, [statusSelect]);
 
+    const requestEquipment = async (equipmentId) => {
+        try {
+            const response = await createEquipmentRequest(equipmentId)
+            alert(response.message)
+        } catch (e) {
+            alert(e.message)
+        }
+    }
+
     return (
         <section className='flex justify-start flex-col items-center w-full h-[100vh] p-[100px]'>
             <div style={{borderRadius:'0px 0px 0px 40px'}} className='fixed right-0 top-0 w-[180px] h-[120px] border border-solid border-gray-200 shadow-md flex justify-center items-center gap-[5px] flex-col p-[40px]'>
@@ -54,7 +64,7 @@ function Login() {
                 ))}
             </div>
             <div className='container-list'>
-                {equipments.map(({name,status,description},index) => (
+                {equipments.map(({id,name,status,description,is_requested},index) => (
                     <motion.div
                         key={index}
                         initial={{ opacity: 0, y: 20 }}
@@ -77,13 +87,20 @@ function Login() {
                             {description}
                         </div>
                         <div className='flex justify-center items-center'>
-                            <button
-                                type="submit" 
-                                style={{borderRadius:'20px',background:'#162456'}} 
+                            {is_requested ? <button
+                                type="submit"
+                                style={{borderRadius:'20px',background:'#162456'}}
                                 className='text-white flex justify-center items-center py-[5px] px-[10px] text-[18px] mt-[20px]'
+                                onClick={() => {requestEquipment(id)}}
                             >
                                 Solicitar
-                            </button>
+                            </button> : <button
+                              type="submit"
+                              style={{borderRadius:'20px',background:'#0fb630'}}
+                              className='text-white flex justify-center items-center py-[5px] px-[10px] text-[18px] mt-[20px]'
+                            >
+                                Equipo ya solicitado
+                            </button>}
                             {user?.rol === 'admin' && <button
                                 type="submit" 
                                 style={{borderRadius:'20px',background:'#162456'}} 
