@@ -1,17 +1,17 @@
-import axiosQuery from '../utils/axios.js'
+import { axiosQuery } from '../utils/axios.js'
 
-export const login = async (email, password) => {
+export const login = async (data) => {
     try {
-        const response = await axiosQuery.post('/auth/login', { email, password });
+        const response = await axiosQuery.post('/login', data);
         return response.data;
     } catch (error) {
         throw error.response ? error.response.data : new Error('Network Error');
     }
 }
 
-export const register = async (name, email, password) => {
+export const register = async (data) => {
     try {
-        const response = await axiosQuery.post('/auth/register', { name, email, password });
+        const response = await axiosQuery.post('/register', data);
         return response.data;
     } catch (error) {
         throw error.response ? error.response.data : new Error('Network Error');

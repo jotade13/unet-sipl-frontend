@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState} from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { useForm } from "react-hook-form"
 import { Input, Form } from "antd"
 import { PuzzlePieceIcon, UserIcon } from '@heroicons/react/24/outline'
@@ -10,7 +10,7 @@ import equipmentConsts from "../consts/equipment-consts.js";
 
 function Login() {
     const status = Object.values(equipmentConsts.status)
-
+    const navigate = useNavigate()
     const [statusSelect, setStatusSelect] = useState(0)
     const [user, setUser] = useState({})
     const [equipments, setEquipments] = useState([])
@@ -36,13 +36,17 @@ function Login() {
 
     return (
         <section className='flex justify-start flex-col items-center w-full h-[100vh] p-[100px]'>
-            <div style={{borderRadius:'0px 0px 0px 40px'}} className='fixed right-0 top-0 w-[180px] h-[120px] border-6 border-solid border-[#2374a7] flex justify-center items-center gap-[5px] flex-col p-[40px]'>
+            <div style={{borderRadius:'0px 0px 0px 40px'}} className='fixed right-0 top-0 w-[180px] h-[120px] border border-solid border-gray-200 shadow-md flex justify-center items-center gap-[5px] flex-col p-[40px]'>
                 <UserIcon style={{width:'50px',height:'50px',minWidth:'50px',minHeight:'50px', color:'black'}}/>
                 <p className='text-black text-center w-full'>{user?.name}</p>
+            </div>
+            <div onClick={() => {localStorage.setItem('token',''); navigate('/login')}} style={{borderRadius:'0px 0px 0px 40px', cursor:'pointer'}} className='fixed right-[180px] top-[0px] w-[180px] h-[60px] border border-solid border-gray-200 shadow-md flex justify-center items-center gap-[5px] flex-col p-[20px]'>
+                <p className='text-black text-center w-full'>Cerrar Sesion</p>
             </div>
             <div className='w-full h-auto flex flex-row mb-[30px] gap-[20px]'>
                 {status.map((e,index) => (
                     <div 
+                        key={index}
                         style={{borderRadius:'20px', background: statusSelect === index ? '#162456' : 'white', color: statusSelect === index ? 'white' : '#162456', transition:'all ease-in-out 0.5s', cursor:'pointer'}} 
                         className='border-2 border-solid border-blue-950 p-[10px] font-bold'
                         onClick={() => setStatusSelect(index)}
@@ -58,7 +62,7 @@ function Login() {
                         viewport={{ once: false }}
                         transition={{ duration: 0.4, delay: index * 0.1 }} 
                         style={{borderRadius:'20px'}}
-                        className='h-auto pt-[100px] w-[300px] relative flex flex-col justify-center items-center border-2 border-solid border-blue-950 p-[10px]'
+                        className='h-auto pt-[100px] w-[300px] relative flex flex-col justify-center items-center border border-solid border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200 p-[10px]'
                     >
                         <div className='infiniti-move absolute right-[-10px] top-[-10px] max-w-[140px] border-2 p-[10px] bg-white' style={{borderRadius:'20px', zIndex:'2'}}>
                             {status}
