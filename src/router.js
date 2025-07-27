@@ -4,11 +4,12 @@ import Dashboard from "./containers/dashboard";
 import Login from "./containers/login";
 import Register from "./containers/register"
 import { AuthLayout } from "./containers/AuthLayout";
+import { DefaultLayout } from "./containers/DefaultLayout";
 
 
 export const router = createBrowserRouter([
     { 
-        path: "/auth", 
+        path: "/", 
         Component: AuthLayout, 
         children: [
             { 
@@ -19,11 +20,16 @@ export const router = createBrowserRouter([
                 path: "register", 
                 Component: Register
             },
+        ],
+    },
+    {
+        path:"/",
+        Component: DefaultLayout,
+        children: [
             {
-                path: "dashboard", 
+                path: "dashboard",
                 Component: Dashboard
             }
         ]
-    },
-
+    }
 ]);
