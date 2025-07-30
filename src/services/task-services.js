@@ -1,15 +1,17 @@
 import { axiosQuery } from "../utils/axios"
 
 
-export const getTasks = async (callback) => {
+export const getTasks = async (status,name) => {
     try {
-        const response = await axiosQuery.get("/task");
+
+        const response = await axiosQuery.get("/task",{
+            params: {status,search:name}
+        });
         if(response.status === 200){
             return response.data
         }
     }catch(err) {
         console.log(err?.response?.data);
-        if(typeof callback === 'function'){callback(err?.response?.data)};
     }
 }
 

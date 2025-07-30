@@ -1,25 +1,22 @@
 import {useCallback, useEffect, useState, useRef} from 'react'
 import { getTasks } from '../services/task-services';
-import { notification, Input } from 'antd';
+import { Input } from 'antd';
 import { CreateTaskModal } from "../components/CreateTaskModal"
 
 function DashboardTareas() {
     const [tasks, setTasks] = useState([])
-    const [status, setStatus] = useState(false)
+    const [name, setName] = useState('')
+    const [status, setStatus] = useState('completed')
     const openModal = useRef({})
 
     const getTask = useCallback(async () => {
-        let data = await getTasks((message) => {
-            if(message){
-                notification.error({message});
-            }
-        });
+        let data = await getTasks(status, name);
         setTasks(data.data.tasks.data)
-    },[])
+    },[status, name])
 
     useEffect(() => {
         getTask();
-    },[])
+    },[status,name])
 
     return <div className='w-full h-[100vh]'>
         <div className='w-full h-[90px] border border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200 flex justify-between items-center'>
@@ -44,7 +41,10 @@ function DashboardTareas() {
         <div className='w-full h-auto flex row gap-5 justify-center items-center'>
             <div className='w-[60%] flex row gap-[20px]'>
                 <div className='w-[60%]'>
-                    <Input style={{height:'100%', borderRadius:'20px'}}/>
+                    <Input 
+                        style={{height:'100%', borderRadius:'20px'}}
+                        onChange={(e) => setName(e)}    
+                    />
                 </div>
                 <div 
                     onClick={() => setStatus('completed')}
@@ -68,12 +68,12 @@ function DashboardTareas() {
                 </div>
             </div>
         </div>
-        <div className='container-list'>
+        <div className='container-list pt-[20px]'>
             {tasks?.map(({name,description,status}) => {
-                return <div className='h-auto min-h-[100px] min-w-[100px] radius flex row border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
-                    <h1>{name}</h1>
+                return <div className='relative h-auto p-[20px] min-h-[100px] min-w-[100px] radius flex flex-col border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
+                    <p className='absolute top-[10px] right-[10px] radius2 border border-solid border-blue-950 text-blue-950 w-[100px] text-center p-[5px]'>{status}</p>
+                    <h1 className='text-[30px] font-bold'>{name}</h1>
                     <p>{description}</p>
-                    <p>{status}</p>
                 </div>
             })}
         </div>
@@ -81,6 +81,7 @@ function DashboardTareas() {
             openModal={(func) => {
                 openModal.current = func
             }}
+            setTasks={setTasks}
         />
     </div>
 }

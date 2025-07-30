@@ -5,15 +5,18 @@ import Input from "antd/es/input/Input"
 import Modal from "antd/es/modal/Modal"
 import { createTask } from "../services/task-services"
 
-export const CreateTaskModal = ({openModal=() => {}, id}) => {
+export const CreateTaskModal = ({openModal=() => {}, setTasks}) => {
     const [form] = useForm()
     const [openState, setOpenState] = useState(false)
-    const onFinish = ()  => {
-       
+    const onFinish = async ()  => {
         let task = form.getFieldValue();
-        console.log(task)
-        const response = createTask(task);
-        console.log(response)
+        const response = await createTask(task);
+        setTasks((prev) => [...prev, response?.data?.task])
+        console.log(response?.data?.message || 'Tarea Creada Con Exito')
+        // notification.success({message: response?.data?.message || 'Tarea Creada Con Exito'});
+        createTask(task);
+        setOpenState(false)
+        form.resetFields()
     }
 
     useEffect(() => {
