@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useState, useRef} from 'react'
 import { getTasks } from '../services/task-services';
-import { notification, Input } from 'antd';
+import { notification, Input, message, Popconfirm, Button } from 'antd';
 import { CreateTaskModal } from "../components/CreateTaskModal"
 
 function DashboardTareas() {
@@ -16,6 +16,16 @@ function DashboardTareas() {
         });
         setTasks(data.data.tasks.data)
     },[])
+
+    const completeTask = (e) => {
+        console.log(e);
+        message.success('Click on Yes');
+    };
+
+    const cancelCompleteTask = (e) => {
+        console.log(e);
+        message.error('Click on No');
+    };
 
     useEffect(() => {
         getTask();
@@ -74,6 +84,15 @@ function DashboardTareas() {
                     <h1>{name}</h1>
                     <p>{description}</p>
                     <p>{status}</p>
+                    <Popconfirm
+                        title='Complete task'
+                        onConfirm={completeTask}
+                        onCancel={cancelCompleteTask}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <Button type="primary">Complete task</Button>
+                    </Popconfirm>
                 </div>
             })}
         </div>
