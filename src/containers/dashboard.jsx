@@ -17,7 +17,7 @@ function Login() {
     const [equipments, setEquipments] = useState([])
 
     useEffect(() => {
-        setUser({name: 'Cesar Mora', email: 'morecontrol64@gmail.com', rol: 'student'})
+        setUser({name: 'Cesar Mora', email: 'morecontrol64@gmail.com', rol: 'admin'})
     },[])
 
 
