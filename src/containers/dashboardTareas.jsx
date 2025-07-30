@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useState, useRef} from 'react'
-import { getTasks, updateTask } from '../services/task-services';
-import { notification, Input, message, Popconfirm, Button } from 'antd';
+import { deleteTask, getTasks, updateTask } from '../services/task-services';
+import { notification, Input, Popconfirm, Button } from 'antd';
 import { CreateTaskModal } from "../components/CreateTaskModal"
 
 function DashboardTareas() {
@@ -35,19 +35,19 @@ function DashboardTareas() {
         }
     };
 
-    const cancelCompleteTask = (e) => {
+  
 
+    const deleteId = (id) => {
+        const response = deleteTask(id);
+
+        if(!response.errors) {
+            alert("tarea eliminada correctamente")
+        } else {
+            alert("Error eliminando tarea")
+        }
     };
 
-    const deleteTask = (e) => {
-        console.log(e);
-        message.success('Click on Yes');
-    };
-
-    const cancelDeleteTask = (e) => {
-        console.log(e);
-        message.error('Click on No');
-    };
+ 
 
     useEffect(() => {
         getTask();
@@ -101,7 +101,7 @@ function DashboardTareas() {
         </div>
         <div className='container-list'>
             {tasks?.map(({id,name,description,status}) => {
-                return <div className='h-auto min-h-[100px] min-w-[100px] radius flex row border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
+                return <div key={id} className='h-auto min-h-[100px] min-w-[100px] radius flex row border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
                     <h1>{name}</h1>
                     <p>{description}</p>
                     <p>{status}</p>
@@ -110,18 +110,26 @@ function DashboardTareas() {
                         onConfirm={() => {
                             completeTask(id)
                         }}
-                        onCancel={cancelCompleteTask}
                         okText="Yes"
                         cancelText="No"
                     >
                         <Button type="primary">Complete task</Button>
                     </Popconfirm>}
+                    <Popconfirm
+                        title='delete task'
+                        onConfirm={() => {
+                            deleteId(id)
+                        }}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <Button type="primary">Eliminar task</Button>
+                    </Popconfirm>
                 </div>
             })}
         </div>
         <CreateTaskModal 
             openModal={(func) => {
-                console.log("func",func)
                 openModal.current = func
             }}
         />
