@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useState, useRef} from 'react'
-import { getTasks } from '../services/task-services';
+import { getTasks, updateTask } from '../services/task-services';
 import { notification, Input, message, Popconfirm, Button } from 'antd';
 import { CreateTaskModal } from "../components/CreateTaskModal"
 
@@ -17,14 +17,26 @@ function DashboardTareas() {
         setTasks(data.data.tasks.data)
     },[])
 
-    const completeTask = (e) => {
-        console.log(e);
-        message.success('Click on Yes');
+    const completeTask = (id) => {
+        const response = updateTask(id, {
+            status: 'completed'
+        });
+
+        if(!response.errors) {
+            alert("Status actualizado correctamente")
+            setTasks(tasks.map((task) => {
+                if(task.id == id) {
+                    task.status = 'completed'
+                }
+                return task;
+            }))
+        } else {
+            alert("Error actualizando")
+        }
     };
 
     const cancelCompleteTask = (e) => {
-        console.log(e);
-        message.error('Click on No');
+
     };
 
     useEffect(() => {
@@ -79,20 +91,22 @@ function DashboardTareas() {
             </div>
         </div>
         <div className='container-list'>
-            {tasks?.map(({name,description,status}) => {
+            {tasks?.map(({id,name,description,status}) => {
                 return <div className='h-auto min-h-[100px] min-w-[100px] radius flex row border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
                     <h1>{name}</h1>
                     <p>{description}</p>
                     <p>{status}</p>
-                    <Popconfirm
+                    {status == 'pending' && <Popconfirm
                         title='Complete task'
-                        onConfirm={completeTask}
+                        onConfirm={() => {
+                            completeTask(id)
+                        }}
                         onCancel={cancelCompleteTask}
                         okText="Yes"
                         cancelText="No"
                     >
                         <Button type="primary">Complete task</Button>
-                    </Popconfirm>
+                    </Popconfirm>}
                 </div>
             })}
         </div>

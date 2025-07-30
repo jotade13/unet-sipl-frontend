@@ -23,3 +23,14 @@ export const createTask = async (data) => {
         throw error.response ? error.response.data : new Error ("Network Error")
     }
 }
+
+export const updateTask = async (id, data) => {
+    try {
+        const response = await axiosQuery.put(`/task/${id}`,data)
+        return response.data;
+
+    }
+    catch(error) {
+        throw error.response ? error.response.data : new Error ("Network Error")
+    }
+}
