@@ -111,7 +111,7 @@ function DashboardTareas() {
                         okText="Yes"
                         cancelText="No"
                     >
-                        <Button type="primary">Complete task</Button>
+                        <Button type="primary" className='mt-2'>Complete task</Button>
                     </Popconfirm>}
                     <Popconfirm
                         title='delete task'
@@ -122,7 +122,7 @@ function DashboardTareas() {
                         okText="Yes"
                         cancelText="No"
                     >
-                        <Button type="default">Eliminar task</Button>
+                        <Button type="default" className='mt-2'>Eliminar task</Button>
                     </Popconfirm>
                 </div>
             })}
