@@ -5,14 +5,15 @@ import Input from "antd/es/input/Input"
 import Modal from "antd/es/modal/Modal"
 import { createTask } from "../services/task-services"
 
-export const CreateTaskModal = ({openModal=() => {}, id}) => {
+export const CreateTaskModal = ({openModal=() => {}}) => {
     const [form] = useForm()
     const [openState, setOpenState] = useState(false)
     const onFinish = ()  => {
-       
         let task = form.getFieldValue();
         console.log(task)
-        const response = createTask(task);
+       createTask(task);
+       setOpenState(false)
+       form.resetFields()
     }
 
     useEffect(() => {
