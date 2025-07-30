@@ -38,7 +38,7 @@ export const updateTask = async (id, data) => {
 }
 export const deleteTask = async (id) => {
     try {
-        const response = await axiosQuery.put(`/task/${id}`)
+        const response = await axiosQuery.delete(`/task/${id}`)
         return response.data;
 
     }
