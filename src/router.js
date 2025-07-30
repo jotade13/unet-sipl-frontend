@@ -3,10 +3,10 @@ import { Root } from "./Root";
 import Dashboard from "./containers/dashboard";
 import Login from "./containers/login";
 import Register from "./containers/register"
+import DashboardTareas from "./containers/dashboardTareas";
 import { AuthLayout } from "./containers/AuthLayout";
 import { DefaultLayout } from "./containers/DefaultLayout";
 import { Equipments } from "./containers/Equipments";
-
 
 export const router = createBrowserRouter([
     { 
@@ -32,9 +32,13 @@ export const router = createBrowserRouter([
                 Component: Dashboard
             },
             {
+                path: "tareas",
+                Component: DashboardTareas
+            },
+            {
                 path: "equipment:id",
                 Component: Equipments
             }
         ]
-    }
+    },
 ]);

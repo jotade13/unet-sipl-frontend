@@ -87,25 +87,6 @@ function Login() {
                             {description}
                         </div>
                         <div className='flex justify-center items-center'>
-<<<<<<< HEAD
-                            {user?.rol === 'admin'  ?
-                            <button
-                                type="submit" 
-                                style={{borderRadius:'20px',background:'#162456'}} 
-                                className='text-white flex justify-center items-center py-[5px] px-[10px] text-[18px] mt-[20px] cursor-pointer'
-                            >
-                                Ver Solicitudes
-                            </button> :
-                            <button
-                                type="submit" 
-                                style={{borderRadius:'20px',background:'#162456'}} 
-                                className='text-white flex justify-center items-center py-[5px] px-[10px] text-[18px] mt-[20px] cursor-pointer'
-                                onClick={() => {requestEquipment(id)}}
-                            >
-                                Solicitar
-                            </button>
-                            }
-=======
                             {is_requested ? <button
                                 type="submit"
                                 style={{borderRadius:'20px',background:'#162456'}}
@@ -127,7 +108,6 @@ function Login() {
                             >
                                 Ver Solicitudes
                             </button>}
->>>>>>> 250e48474d1e1028b2e23877f741c2f61bbfb2d5
                         </div>
                     </motion.div>
                 ))}
