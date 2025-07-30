@@ -1,5 +1,6 @@
 import { axiosQuery } from "../utils/axios"
 
+
 export const getTasks = async (callback) => {
     try {
         const response = await axiosQuery.get("/task");
@@ -12,12 +13,13 @@ export const getTasks = async (callback) => {
     }
 }
 
-export const createTask = async () => {
+export const createTask = async (data) => {
     try {
-        const response = await axiosQuery.post("/task")
+        const response = await axiosQuery.post("/task",data)
+        return response.data;
 
     }
-    catch {
-
+    catch(error) {
+        throw error.response ? error.response.data : new Error ("Network Error")
     }
 }

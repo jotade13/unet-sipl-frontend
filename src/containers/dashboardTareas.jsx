@@ -1,11 +1,12 @@
-
-import {useCallback, useEffect, useState} from 'react'
+import {useCallback, useEffect, useState, useRef} from 'react'
 import { getTasks } from '../services/task-services';
 import { notification, Input } from 'antd';
+import { CreateTaskModal } from "../components/CreateTaskModal"
 
 function DashboardTareas() {
     const [tasks, setTasks] = useState([])
     const [status, setStatus] = useState(false)
+    const openModal = useRef({})
 
     const getTask = useCallback(async () => {
         let data = await getTasks((message) => {
@@ -25,6 +26,9 @@ function DashboardTareas() {
             <div className='w-auto ml-[40px] font-bold text-[25px]'>Control de tareas JCP++</div>
             <div className='w-auto mr-[40px]'>Nombre Apellido</div>
         </div>
+        <div className='flex left-0 top-[100px] p-[10px]' onClick={() => {
+            openModal.current(true)
+        }}>Agregar Tarea</div>
         <div className='w-full h-auto flex flex-col justify-center items-center'>
             <div className='w-[60%] h-auto flex row '>
                 <div className='w-[50%] radius m-[50px] p-[20px] h-auto flex flex-col border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
@@ -73,6 +77,12 @@ function DashboardTareas() {
                 </div>
             })}
         </div>
+        <CreateTaskModal 
+            openModal={(func) => {
+                console.log("func",func)
+                openModal.current = func
+            }}
+        />
     </div>
 }
 
