@@ -123,7 +123,7 @@ function DashboardTareas() {
                         okText="Yes"
                         cancelText="No"
                     >
-                        <Button type="primary">Eliminar task</Button>
+                        <Button type="default">Eliminar task</Button>
                     </Popconfirm>
                 </div>
             })}
