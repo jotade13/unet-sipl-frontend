@@ -4,7 +4,6 @@ import { axiosQuery } from "../utils/axios"
 export const getTasks = async (status,name) => {
     try {
 
-        console.log(name)
         const response = await axiosQuery.get("/task",{
             params: {status,search:name}
         });
