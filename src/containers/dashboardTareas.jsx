@@ -4,13 +4,17 @@ import { notification, Input, Popconfirm, Button } from 'antd';
 import { CreateTaskModal } from "../components/CreateTaskModal"
 
 function DashboardTareas() {
-    const [tasks, setTasks] = useState([])
-    const [name, setName] = useState('')
-    const [status, setStatus] = useState('completed')
+    const [tasks, setTasks] = useState([]);
+    const [completed, setCompleted] = useState(0);
+    const [pending, setPending] = useState(0)
+    const [name, setName] = useState('');
+    const [status, setStatus] = useState('completed');
     const openModal = useRef({})
 
     const getTask = useCallback(async () => {
         let data = await getTasks(status, name);
+        setCompleted(data?.data?.completed_tasks);
+        setPending(data?.data?.pending_tasks);
         setTasks(data.data.tasks.data)
     },[status, name])
 
@@ -50,20 +54,20 @@ function DashboardTareas() {
 
     return <div className='w-full h-[100vh]'>
         <div className='w-full h-[90px] border border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200 flex justify-between items-center'>
-            <div className='w-auto ml-[40px] font-bold text-[25px]'>Control de tareas JCP++</div>
+            <div className='w-auto ml-[40px] font-bold text-[25px]'>Control de tareas JCG++</div>
             <Button type="primary" className="mr-6" onClick={() => {
                 openModal.current(true)
             }}>Agregar Tarea</Button>
         </div>
         <div className='w-full h-auto flex flex-col justify-center items-center'>
             <div className='w-[60%] h-auto flex row '>
-                <div className='w-[50%] radius m-[50px] p-[20px] h-auto flex flex-col border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
+                <div className='w-[50%] radius m-[50px] p-[20px] shadow-green-200 h-auto flex flex-col border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
                     <h1 className='font-bold text-[30px] w-full text-center p-20px'>Tareas Completadas</h1>
-                    <h1 className='font-bold text-[30px] w-full text-center p-20px'>0</h1>
+                    <h1 className='font-bold text-[50px] w-full text-center p-20px'>{completed}</h1>
                 </div>
-                <div className='w-[50%] radius m-[50px] p-[20px] h-auto flex flex-col border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
+                <div className='w-[50%] radius m-[50px] p-[20px] shadow-green-200 h-auto flex flex-col border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
                     <h1 className='font-bold block text-[30px] w-full text-center p-20px'>Tareas Pendientes</h1>
-                    <h1 className='font-bold block text-[30px] w-full text-center p-20px'>0</h1>
+                    <h1 className='font-bold block text-[50px] w-full text-center p-20px'>{pending}</h1>
                 </div>
             </div>
         </div>
@@ -98,7 +102,7 @@ function DashboardTareas() {
             </div>
         </div>
         <div className='container-list pt-[20px]'>
-            {tasks?.map(({id,name,description,status}) => {
+            {tasks.filter(e => e?.status === status)?.map(({id,name,description,status}) => {
                 return <div key={id} className='relative h-auto p-[20px] min-h-[100px] min-w-[100px] radius flex flex-col border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
                     <p className='absolute top-[10px] right-[10px] radius2 border border-solid border-blue-950 text-blue-950 w-[100px] text-center p-[5px]'>{status}</p>
                     <h1 className='text-[30px] font-bold'>{name}</h1>
