@@ -46,11 +46,10 @@ function DashboardTareas() {
     return <div className='w-full h-[100vh]'>
         <div className='w-full h-[90px] border border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200 flex justify-between items-center'>
             <div className='w-auto ml-[40px] font-bold text-[25px]'>Control de tareas JCP++</div>
-            <div className='w-auto mr-[40px]'>Nombre Apellido</div>
+            <Button type="primary" className="mr-6" onClick={() => {
+                openModal.current(true)
+            }}>Agregar Tarea</Button>
         </div>
-        <div className='flex left-0 top-[100px] p-[10px]' onClick={() => {
-            openModal.current(true)
-        }}>Agregar Tarea</div>
         <div className='w-full h-auto flex flex-col justify-center items-center'>
             <div className='w-[60%] h-auto flex row '>
                 <div className='w-[50%] radius m-[50px] p-[20px] h-auto flex flex-col border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
