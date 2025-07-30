@@ -1,10 +1,10 @@
+import { CreateTaskModal } from "../components/CreateTaskModal"
 
-import {useCallback, useEffect, useState} from 'react'
 
 function DashboardTareas() {
     
 
-    return <div>Hola</div>
+    return <div><CreateTaskModal></CreateTaskModal>Hola</div>
 }
 
 export default DashboardTareas
