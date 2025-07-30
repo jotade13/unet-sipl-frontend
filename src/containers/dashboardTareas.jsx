@@ -14,7 +14,7 @@ function DashboardTareas() {
                 notification.error({message});
             }
         });
-        setTasks(data.data)
+        setTasks(data.data.tasks.data)
     },[])
 
     useEffect(() => {
@@ -69,7 +69,7 @@ function DashboardTareas() {
             </div>
         </div>
         <div className='container-list'>
-            {tasks.map(({name,description,status}) => {
+            {tasks?.map(({name,description,status}) => {
                 return <div className='h-auto min-h-[100px] min-w-[100px] radius flex row border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
                     <h1>{name}</h1>
                     <p>{description}</p>
