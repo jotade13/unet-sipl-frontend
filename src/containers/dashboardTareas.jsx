@@ -26,10 +26,10 @@ function DashboardTareas() {
             <div className='w-auto ml-[40px] font-bold text-[25px]'>Control de tareas JCP++</div>
             <div className='w-auto mr-[40px]'>Nombre Apellido</div>
         </div>
-        <div className='flex left-0 top-[100px] p-[10px]' onClick={() => {
+        <div className='flex fixed right-[20px] top-[100px] p-[10px] bg-blue-950 text-white border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200 radius' onClick={() => {
             openModal.current(true)
         }}>Agregar Tarea</div>
-        <div className='w-full h-auto flex flex-col justify-center items-center'>
+        <div className='w-full h-auto flex flex-col justify-center items-center '>
             <div className='w-[60%] h-auto flex row '>
                 <div className='w-[50%] radius m-[50px] p-[20px] h-auto flex flex-col border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
                     <h1 className='font-bold text-[30px] w-full text-center p-20px'>Tareas Completadas</h1>
@@ -50,7 +50,7 @@ function DashboardTareas() {
                     onClick={() => setStatus('completed')}
                     style={{cursor:'pointer'}}
                     className={status === 'completed' 
-                        ? 'w-[15%] p-[10px] border border-solid border-blue-800 bg-blue-800 text-white radius flex justify-center items-center transition-all duration-700' 
+                        ? 'w-[15%] p-[10px] border border-solid border-blue-950 bg-blue-950 text-white radius flex justify-center items-center transition-all duration-700' 
                         : 'w-[15%] p-[10px] border border-solid border-blue-300 radius text-black flex justify-center items-center'
                     }
                 >
@@ -60,7 +60,7 @@ function DashboardTareas() {
                     onClick={() => setStatus('pending')}
                     style={{cursor:'pointer'}}
                     className={status === 'pending' 
-                        ? 'w-[15%] p-[10px] border border-solid border-blue-800 bg-blue-800 text-white radius flex justify-center items-center transition-all duration-700' 
+                        ? 'w-[15%] p-[10px] border border-solid border-blue-950 bg-blue-950 text-white radius flex justify-center items-center transition-all duration-700' 
                         : 'w-[15%] p-[10px] border border-solid border-blue-300 radius text-black flex justify-center items-center'
                     }
                 >
@@ -69,7 +69,7 @@ function DashboardTareas() {
             </div>
         </div>
         <div className='container-list'>
-            {tasks.map(({name,description,status}) => {
+            {tasks.map(({name,description,status,id}) => {
                 return <div className='h-auto min-h-[100px] min-w-[100px] radius flex row border-gray-200 border-solid shadow-sm hover:shadow-md transition-shadow duration-200'>
                     <h1>{name}</h1>
                     <p>{description}</p>
@@ -79,7 +79,6 @@ function DashboardTareas() {
         </div>
         <CreateTaskModal 
             openModal={(func) => {
-                console.log("func",func)
                 openModal.current = func
             }}
         />
