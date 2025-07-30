@@ -27,6 +27,16 @@ function DashboardTareas() {
         message.error('Click on No');
     };
 
+    const deleteTask = (e) => {
+        console.log(e);
+        message.success('Click on Yes');
+    };
+
+    const cancelDeleteTask = (e) => {
+        console.log(e);
+        message.error('Click on No');
+    };
+
     useEffect(() => {
         getTask();
     },[])
@@ -92,6 +102,15 @@ function DashboardTareas() {
                         cancelText="No"
                     >
                         <Button type="primary">Complete task</Button>
+                    </Popconfirm>
+                    <Popconfirm
+                        title='Delete task'
+                        onConfirm={deleteTask}
+                        onCancel={cancelDeleteTask}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <Button type="primary">delete task</Button>
                     </Popconfirm>
                 </div>
             })}
