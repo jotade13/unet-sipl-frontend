@@ -3,9 +3,9 @@ import { Root } from "./Root";
 import Dashboard from "./containers/dashboard";
 import Login from "./containers/login";
 import Register from "./containers/register"
+import DashboardTareas from "./containers/dashboardTareas";
 import { AuthLayout } from "./containers/AuthLayout";
 import { DefaultLayout } from "./containers/DefaultLayout";
-
 
 export const router = createBrowserRouter([
     { 
@@ -29,7 +29,11 @@ export const router = createBrowserRouter([
             {
                 path: "dashboard",
                 Component: Dashboard
+            },
+            {
+                path: "tareas",
+                Component: DashboardTareas
             }
         ]
-    }
+    },
 ]);
