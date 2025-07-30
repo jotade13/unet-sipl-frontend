@@ -12,6 +12,8 @@ export const CreateTaskModal = ({openModal=() => {}}) => {
         let task = form.getFieldValue();
         console.log(task)
        createTask(task);
+       setOpenState(false)
+       form.resetFields()
     }
 
     useEffect(() => {
