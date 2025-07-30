@@ -13,6 +13,7 @@ export const CreateTaskModal = ({openModal=() => {}, id}) => {
         let task = form.getFieldValue();
         console.log(task)
         const response = createTask(task);
+        console.log(response)
     }
 
     useEffect(() => {
