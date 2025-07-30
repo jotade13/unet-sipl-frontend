@@ -117,6 +117,7 @@ function DashboardTareas() {
                         title='delete task'
                         onConfirm={() => {
                             deleteId(id)
+                            getTask()
                         }}
                         okText="Yes"
                         cancelText="No"
