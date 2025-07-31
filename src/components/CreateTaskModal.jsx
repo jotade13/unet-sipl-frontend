@@ -5,16 +5,14 @@ import Input from "antd/es/input/Input"
 import Modal from "antd/es/modal/Modal"
 import { createTask } from "../services/task-services"
 
-export const CreateTaskModal = ({openModal=() => {}, setTasks}) => {
+export const CreateTaskModal = ({openModal=() => {}, setTasks, toast}) => {
     const [form] = useForm()
     const [openState, setOpenState] = useState(false)
     const onFinish = async ()  => {
         let task = form.getFieldValue();
         const response = await createTask(task);
         setTasks((prev) => [...prev, response?.data?.task])
-        console.log(response?.data?.message || 'Tarea Creada Con Exito')
-        // notification.success({message: response?.data?.message || 'Tarea Creada Con Exito'});
-        createTask(task);
+        toast.success(response?.data?.message || 'Tarea Creada Con Exito')
         setOpenState(false)
         form.resetFields()
     }
@@ -26,7 +24,7 @@ export const CreateTaskModal = ({openModal=() => {}, setTasks}) => {
     },[openModal])
 
     return <Modal open={openState} onOk={onFinish} onCancel={() => setOpenState(false)} okText="Crear Tarea">
-        <Form onFinish={onFinish} form={form} layout="vertical">
+        <Form form={form} layout="vertical">
             <FormItem name="name" label="Nombre">
                 <Input/>
             </FormItem>

@@ -1,6 +1,9 @@
 import { Link, useNavigate } from 'react-router'
 import { Input, Form, Divider } from "antd"
 import { axiosQuery } from '../utils/axios';
+import Lottie from "lottie-react";
+import loginregistergif from '../assets/loginregistergif.json'
+// import spaceboydeveloper from '../assets/spaceboydeveloper.json';
 
 function Login() {
   const navigate = useNavigate();
@@ -15,8 +18,18 @@ function Login() {
 
   return (
     <section className='flex justify-center flex-row items-center w-full h-[100vh]'>
-      <div className='w-[50%] h-[100%] flex bg-[#2374a7]'></div>
-      <div className='w-[50%] h-[100%] p-[20px] flex flex-col items-center justify-center'>
+      <div className='w-[55%] h-[100%] flex bg-[#2374a7] overflow-hidden relative items-center justify-center'>
+        <Lottie 
+          animationData={loginregistergif} 
+          loop={true} 
+          autoplay={true} 
+          style={{ width: "100%", height: "100%"}}
+          rendererSettings={{
+            preserveAspectRatio: "xMidYMid slice"
+          }}
+        />
+      </div>
+      <div className='w-[45%] h-[100%] p-[20px] flex flex-col items-center justify-center'>
         <div className='flex flex-col items-center justify-center' style={{borderRadius:'20px', border:'1px solid #2374a7', padding:'20px'}}>
           <h1 className='text-[50px] font-bold text-center'>Gestion de equipo</h1>
           {/* formulario */}

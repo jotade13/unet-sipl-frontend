@@ -20,3 +20,32 @@
 .radius2{
   border-radius: 10px;
 }
+
+@keyframes fadeOutAfterDelay {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  50% {
+    opacity: 1; /* Espera 2s (en animación total de 4s) */
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden; /* Oculto pero ocupa espacio */
+  }
+}
+
+.box-load {
+  z-index: 50;
+  background: white;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  animation: fadeOutAfterDelay 5s forwards;
+}
