@@ -17,7 +17,6 @@ export const getTasks = async (status,name) => {
 
 export const createTask = async (data) => {
     try {
-        console.log("//////////2")
         const response = await axiosQuery.post("/task",data)
         return response.data;
 

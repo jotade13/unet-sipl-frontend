@@ -1,77 +1,116 @@
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
-import { Input, Form, Divider } from "antd"
-import { axiosQuery } from '../utils/axios';
+import { Input, Form, Upload, Button } from "antd"
+import { UploadOutlined } from '@ant-design/icons';
 import { register } from '../services/auth-services';
+import Lottie from "lottie-react";
+import loginregistergif from '../assets/loginregistergif.json'
 
 function Login() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
   const [form] = Form.useForm();
 
   const onFinish = async () => {
+    setLoading(false)
     let data = form.getFieldsValue();
-    await register(data)
+    await register(data);
+    setLoading(true)
     navigate('/login')    
   }
 
   return (
     <section className='flex justify-center flex-row items-center w-full h-[100vh]'>
-      <div className='w-[50%] h-[100%] flex bg-[#2374a7]'></div>
-      <div className='w-[50%] h-[100%] p-[20px] flex flex-col items-center justify-center'>
-        <div className='flex flex-col items-center justify-center' style={{borderRadius:'20px', border:'1px solid #2374a7', padding:'20px'}}>
-          <h1 className='text-[50px] font-bold text-center'>Nuevo Usuario</h1>
-          {/* formulario */}
-          <div className='w-full h-auto px-[20px]'>
-            <Form
-              form={form}
-              onFinish={onFinish}
-              layout='vertical'
-            >
-              <Form.Item
-                label="Nombre"
-                name="name"
-                rules={[{ required: true, message: 'Por favor agrega tu nombre' }]}
+      <div className='w-[55%] h-[100%] flex bg-[#2374a7] overflow-hidden relative items-center justify-center'>
+        <Lottie 
+          animationData={loginregistergif} 
+          loop={true} 
+          autoplay={true} 
+          style={{ width: "100%", height: "100%"}}
+          rendererSettings={{
+            preserveAspectRatio: "xMidYMid slice"
+          }}
+        />
+      </div>
+      <div className='w-[45%] h-[100%] p-[20px] flex flex-col items-center justify-center overflow-scroll'>
+        <div className="h-[100%] flex items-center justify-center p-4 col min-w-[400px]">
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+            <div className="text-white p-8 text-center pb-4">
+              <h1 className="text-black text-2xl font-bold mb-2">Nuevo Usuario</h1>
+            </div>
+
+            <div className="p-8 pt-0 pb-0">
+              <Form
+                form={form}
+                onFinish={onFinish}
+                className='w-full'
+                layout='vertical'
               >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[{ required: true, message: 'Por favor agrega tu email' }]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                label="Contraseña"
-                name="password"
-                rules={[{ required: true, message: 'La contrasñea debe tener 8 caracteres'   }]}
-              >
-                <Input type='password'/>
-              </Form.Item>
-              <Form.Item
-                label="Confirmar Contraseña"
-                name="password_confirmation"
-                rules={[{ required: true, message: 'La contrasñea debe tener 8 caracteres'   }]}
-              >
-                <Input type='password'/>
-              </Form.Item>
-              <Form.Item
-                label="Cedula"
-                name="identity_card"
-                rules={[{ required: true, message: 'Por favor agrega tu Cedula' }]}
-              >
-                <Input />
-              </Form.Item>
-              <button
-                type="submit" 
-                style={{borderRadius:'20px',background:'#162456'}} 
-                className='text-white flex justify-center items-center p-[15px] text-[20px]'
-              >
-                Continuar
-              </button>
-          </Form>
+                <Form.Item
+                  label="Nombre"
+                  name="name"
+                  rules={[{ required: true, message: 'Por favor agrega tu nombre' }]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  label="Email"
+                  name="email"
+                  rules={[{ required: true, message: 'Por favor agrega tu email' }]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  label="Contraseña"
+                  name="password"
+                  rules={[{ required: true, message: 'La contrasñea debe tener 8 caracteres'   }]}
+                >
+                  <Input type='password'/>
+                </Form.Item>
+                <Form.Item
+                  label="Confirmar Contraseña"
+                  name="password_confirmation"
+                  rules={[{ required: true, message: 'La contrasñea debe tener 8 caracteres'   }]}
+                >
+                  <Input type='password'/>
+                </Form.Item>
+                <Form.Item
+                  label="Cedula"
+                  name="identity_card"
+                  rules={[{ required: true, message: 'Por favor agrega tu Cedula' }]}
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item 
+                  name="image" 
+                  label="Imagen de perfil"
+                  rules={[{ required: true, message: "Por favor agrega tu imagen de perfil" }]}
+                >
+                   <Upload maxCount={1} listType="picture">
+                    <Button type="primary" icon={<UploadOutlined />}>
+                      Upload
+                    </Button>
+                  </Upload>
+                </Form.Item>
+                <div className='flex justify-center items-center'>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full bg-blue-800 text-white py-3 px-4 rounded-lg hover:bg-blue-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+                  >
+                    {loading ? 'Creando cuenta ...' : 'Crear cuenta'}
+                  </button>
+                </div>
+              </Form>
+
+              <div className="mt-0 pt-0 pb-4">
+                <div className="flex justify-center items-center">
+                  <Link to="../login" className='text-[16px] pt-[40px] text-blue-500'>Iniciar sesión</Link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <Link to="../login" className='text-[20px]'>Iniciar sesion</Link>
       </div>
     </section>
   )

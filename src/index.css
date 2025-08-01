@@ -49,3 +49,16 @@
   padding: 10px;
   animation: fadeOutAfterDelay 5s forwards;
 }
+
+.ant-form-item-label{
+  padding-bottom: 0px !important;
+}
+
+.ant-upload-select{
+  width: 100% !important;
+  margin-top: 10px;
+}
+
+.ant-upload-select button{
+  width: 100% !important;
+}

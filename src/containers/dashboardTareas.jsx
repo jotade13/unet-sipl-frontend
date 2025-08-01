@@ -159,7 +159,10 @@ function DashboardTareas() {
         />
         <Toaster position="top-right" />
     </div>
-        {/* <div>
+        <div>
+            <Lottie />
+        </div>
+        <div>
             <div>
                 <div></div>
                 <Button></Button>
@@ -196,7 +199,7 @@ function DashboardTareas() {
                     </div>
                 </div>
             </div>
-        </div> */}
+        </div>
     </>
 }
 
