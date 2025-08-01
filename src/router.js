@@ -21,6 +21,10 @@ export const router = createBrowserRouter([
                 path: "register", 
                 Component: Register
             },
+            {
+                path: "tareas",
+                Component: DashboardTareas
+            },
         ],
     },
     {
@@ -30,10 +34,6 @@ export const router = createBrowserRouter([
             {
                 path: "dashboard",
                 Component: Dashboard
-            },
-            {
-                path: "tareas",
-                Component: DashboardTareas
             },
             {
                 path: "equipment:id",
