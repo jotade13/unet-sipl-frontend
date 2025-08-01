@@ -103,9 +103,9 @@ function Login() {
                 </div>
               </Form>
 
-              <div className="mt-0 pt-0 pb-4">
+              <div className="pt-0 mt-8 pb-4 border-t border-gray-200">
                 <div className="flex justify-center items-center">
-                  <Link to="../login" className='text-[16px] pt-[40px] text-blue-500'>Iniciar sesión</Link>
+                  <Link to="../login" className='text-[16px] pt-[20px] text-blue-500'>Iniciar sesión</Link>
                 </div>
               </div>
             </div>
